@@ -68,6 +68,7 @@ export function LoginPage() {
                   <Input
                     id="email"
                     type="email"
+                    name='email'
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="your@email.com"
@@ -84,6 +85,7 @@ export function LoginPage() {
                   <Input
                     id="password"
                     type="password"
+                    name='password'
                     value={formData.password}
                     onChange={handleInputChange}
                     required

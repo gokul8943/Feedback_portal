@@ -45,7 +45,7 @@ export function RegisterPage() {
       const response = register(formData)
       if ((await response).status === 200 || (await response).status === 201) {
         message.success("User Registered Successfully");
-        navigate('/login');
+        navigate('/sign-in');
     }
     } catch (err) {
       setError('Registration failed. Please try again.');
@@ -72,6 +72,7 @@ export function RegisterPage() {
                 <Label htmlFor="name">Full Name</Label>
                 <Input 
                   id="name" 
+                  name='name'
                   value={formData.name} 
                   onChange={handleInputChange} 
                   placeholder="John Doe"
@@ -83,6 +84,7 @@ export function RegisterPage() {
                 <Input 
                   id="email" 
                   type="email" 
+                  name='email'
                   value={formData.email} 
                   onChange={handleInputChange} 
                   placeholder="your@email.com"
@@ -94,6 +96,7 @@ export function RegisterPage() {
                 <Input 
                   id="password" 
                   type="password" 
+                  name='password'
                   value={formData.password} 
                   onChange={handleInputChange} 
                   required
@@ -103,7 +106,8 @@ export function RegisterPage() {
                 <Label htmlFor="confirmPassword">Confirm Password</Label>
                 <Input 
                   id="confirmPassword" 
-                  type="password" 
+                  type="password"
+                  name='confirmPassword' 
                   value={formData.confirmPassword} 
                   onChange={handleInputChange} 
                   required
@@ -118,7 +122,7 @@ export function RegisterPage() {
         <CardFooter className="flex justify-center">
           <p className="text-sm text-gray-600">
             Already have an account?{' '}
-            <Link to="/login" className="text-blue-600 hover:underline">
+            <Link to="/sign-in" className="text-blue-600 hover:underline">
               Login
             </Link>
           </p>
