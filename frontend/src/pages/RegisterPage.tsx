@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -6,34 +5,48 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { register } from '@/services/userApi/userapi';
+import { message } from 'antd';
 
+interface registerFormData {
+  name:''
+  email:''
+  password:''
+  confirmPassword:''
+}
 export function RegisterPage() {
   const navigate = useNavigate();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [formData, setFormData] = useState<registerFormData>({
+    name:'',
+    email:'',
+    password:'',
+    confirmPassword:''
+  });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
   
   const handleSubmit = async (e:any) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
     
-    if (password !== confirmPassword) {
+    if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       setIsLoading(false);
       return;
     }
     
     try {
-      // Handle registration logic with API
-      // Placeholder for registration logic
-      setTimeout(() => {
+      const response = register(formData)
+      if ((await response).status === 200 || (await response).status === 201) {
+        message.success("User Registered Successfully");
         navigate('/login');
-        setIsLoading(false);
-      }, 1000);
+    }
     } catch (err) {
       setError('Registration failed. Please try again.');
       setIsLoading(false);
@@ -59,8 +72,8 @@ export function RegisterPage() {
                 <Label htmlFor="name">Full Name</Label>
                 <Input 
                   id="name" 
-                  value={name} 
-                  onChange={(e) => setName(e.target.value)} 
+                  value={formData.name} 
+                  onChange={handleInputChange} 
                   placeholder="John Doe"
                   required
                 />
@@ -70,8 +83,8 @@ export function RegisterPage() {
                 <Input 
                   id="email" 
                   type="email" 
-                  value={email} 
-                  onChange={(e) => setEmail(e.target.value)} 
+                  value={formData.email} 
+                  onChange={handleInputChange} 
                   placeholder="your@email.com"
                   required
                 />
@@ -81,8 +94,8 @@ export function RegisterPage() {
                 <Input 
                   id="password" 
                   type="password" 
-                  value={password} 
-                  onChange={(e) => setPassword(e.target.value)} 
+                  value={formData.password} 
+                  onChange={handleInputChange} 
                   required
                 />
               </div>
@@ -91,8 +104,8 @@ export function RegisterPage() {
                 <Input 
                   id="confirmPassword" 
                   type="password" 
-                  value={confirmPassword} 
-                  onChange={(e) => setConfirmPassword(e.target.value)} 
+                  value={formData.confirmPassword} 
+                  onChange={handleInputChange} 
                   required
                 />
               </div>
