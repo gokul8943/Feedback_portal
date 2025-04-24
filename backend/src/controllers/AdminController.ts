@@ -41,9 +41,11 @@ export const deleteUser = async (req: Request, res: Response) => {
 }
 
 export const replyToFeedback = async (req: Request, res: Response) => {
-    const feedbackId = req.params.id;
-    const { reply } = req.body;
-
+    const { feedbackId } = req.params;
+  const { reply } = req.body;
+  console.log(feedbackId);
+  console.log(reply);
+  
     if (!reply) return res.status(400).json({ message: 'Reply is required' });
 
     try {

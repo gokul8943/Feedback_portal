@@ -5,6 +5,6 @@ const adminRouter  = express.Router()
 
 adminRouter.get('/user',getUser as any)
 adminRouter.get('/user/:id',getUsers as any)
-adminRouter.post('/feedback/reply/:id',replyToFeedback as any)
+adminRouter.post('/feedback/reply/:feedbackId',replyToFeedback as any)
 
-export default adminRouter
+export default adminRouter 

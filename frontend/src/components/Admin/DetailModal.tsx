@@ -11,8 +11,9 @@ import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 
-import { getFeedbackById } from '@/services/feedbackApi/feedbackApi';
+import { feedbackReply, getFeedbackById } from '@/services/feedbackApi/feedbackApi';
 import renderStars from '@/helpers/Renderstars';
+import { message } from 'antd'
 
 interface Feedback {
     userId: any;
@@ -39,7 +40,6 @@ const DetailModal: React.FC<DetailModalProps> = ({
     const [loading, setLoading] = useState(false);
     const [reply, setReply] = useState('');
     const [sendingReply, setSendingReply] = useState(false);
-    console.log(feedbackId);
 
     useEffect(() => {
         if (!isOpen || !feedbackId) return;
@@ -68,19 +68,21 @@ const DetailModal: React.FC<DetailModalProps> = ({
         
         setSendingReply(true);
         try {
-            // Replace this with your actual API call to send the reply
-            // Example: await sendFeedbackReply(feedbackId, reply);
-            console.log('Sending reply:', { feedbackId, reply });
-            
-            // Reset the reply field after successful submission
-            setReply('');
-            // You might want to show a success message or close the modal
+            const res = await feedbackReply(feedbackId,reply)
+            console.log("Reply sent:", res.data);
+            console.log(reply);
+            if(res){
+                message.success("Login Successful")
+            }
+    
         } catch (err) {
             console.error('Failed to send reply', err);
         } finally {
             setSendingReply(false);
         }
     };
+   
+    
 
     if (!feedbackId || (!feedback && !loading)) return null;
 

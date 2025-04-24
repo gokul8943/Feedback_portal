@@ -13,6 +13,8 @@ export const getFeedbackById = (feedbackId:any) => {
     return axios.get(`/api/feedback/${feedbackId}`)
 }
 
-export const feedbackReply = (feedbackId:any) =>{
-    return axios.post(`/api/feedback/reply/${feedbackId}`)
+export const feedbackReply = (feedbackId:any,reply:any) =>{
+    return axios.post(`/admin/feedback/reply/${feedbackId}`, {
+        reply, 
+      });
 }
