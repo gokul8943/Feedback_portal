@@ -5,6 +5,7 @@ import { LoginPage } from "./pages/LoginPage"
 import { RegisterPage } from "./pages/RegisterPage"
 import HomePage from "./pages/HomePage"
 import { FeedbackForm } from "./components/FeedbackForm"
+import AdminDashBoard from "./pages/Admin/AdminDashBoard"
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path='/sign-up' element={<RegisterPage />} />
           <Route path='/' element={<HomePage/>} />
           <Route path="/add-feedback" element={<FeedbackForm />} />
+          <Route  path='/dashboard' element={<AdminDashBoard />}/>
           <Route />
         </Routes>
       </div>

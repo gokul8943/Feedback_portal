@@ -1,4 +1,4 @@
-import Feedback from "../models/feedback/feedbackModel";
+import FeedbackModel from "../models/feedback/feedbackModel";
 import { Request, Response } from "express";
 
 
@@ -16,7 +16,7 @@ export const createFeedback = async (req: Request, res: Response) => {
             return res.status(400).json({ message: "Rating must be a number between 1 and 5" });
         }
 
-        const newFeedback = new Feedback({
+        const newFeedback = new FeedbackModel({
             userId: userId,
             text:comment,
             rating: parsedRating,
@@ -37,18 +37,19 @@ export const createFeedback = async (req: Request, res: Response) => {
 
 export const getFeedback = async (req: Request, res: Response) => {
     try {
-        const feedback = await Feedback.find();
+        const feedback = await FeedbackModel.find().populate({path:'userId'});
         return res.status(200).json({ message: "Feedback fetched successfully", feedback });
     } catch (error) {
         console.error("Error fetching feedback:", error);
         return res.status(500).json({ message: "Internal server error" });
     }
 };
+  
 
 export const getFeedbackById = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const feedback = await Feedback.findById(id);
+        const feedback = await FeedbackModel.findById(id);
         if (!feedback) {
             return res.status(404).json({ message: "Feedback not found" });
         }
@@ -61,7 +62,7 @@ export const getFeedbackById = async (req: Request, res: Response) => {
 export const deleteFeedback = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const deletedFeedback = await Feedback.findByIdAndDelete(id);
+        const deletedFeedback = await FeedbackModel.findByIdAndDelete(id);
         if (!deletedFeedback) {
             return res.status(404).json({ message: "Feedback not found" });
         }
@@ -86,7 +87,7 @@ export const updateFeedback = async (req: Request, res: Response) => {
             return res.status(400).json({ message: "Rating must be a number between 1 and 5" });
         }
 
-        const updatedFeedback = await Feedback.findByIdAndUpdate(
+        const updatedFeedback = await FeedbackModel.findByIdAndUpdate(
             id,
             { text, rating: parsedRating },
             { new: true }
