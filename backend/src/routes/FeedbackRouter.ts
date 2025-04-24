@@ -3,7 +3,7 @@ import { getFeedback, createFeedback, getFeedbackById, updateFeedback, deleteFee
 
 const feedbackRouter = express.Router()
 
-feedbackRouter.post('/feedback', createFeedback as any)
+feedbackRouter.post('/feedback/:userId', createFeedback as any)
 feedbackRouter.get('/feedback', getFeedback as any)
 feedbackRouter.get('/feedback/:id', getFeedbackById as any)
 feedbackRouter.delete('/feedback/delete', deleteFeedback as any)

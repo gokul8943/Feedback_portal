@@ -2,20 +2,24 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { MenuIcon, XIcon } from 'lucide-react';
+import useAuthStore from '@/store/AuthStore';
+import {message} from 'antd'
 
 export function Navbar() {
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Replace with actual auth state
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
+  const { authState } = useAuthStore();
   
   const handleLogout = () => {
-    // Handle logout logic
-    setIsLoggedIn(false);
-    navigate('/login');
+    useAuthStore.getState().logout();
+    navigate("/sign-in");
+    message.success("Logged out successfully");
   };
 
+   const isLoggedIn = authState.user
+
   return (
-    <nav className="bg-white border-b border-gray-200 py-4 px-6">
+    <nav className="bg-white border-b border-gray-200 py-4 px-6 z-10 fixed w-full">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <span className="text-2xl font-bold text-blue-600" onClick={() => navigate('/')}>
@@ -28,7 +32,7 @@ export function Navbar() {
           <Button variant="ghost" onClick={() => navigate('/')}>Home</Button>
           {isLoggedIn ? (
             <>
-              <Button variant="ghost" onClick={() => navigate('/submit-feedback')}>Submit Feedback</Button>
+              <Button variant="ghost" onClick={() => navigate('/add-feedback')}>Submit Feedback</Button>
               <Button variant="ghost" onClick={() => navigate('/my-feedback')}>My Feedback</Button>
               <Button variant="outline" onClick={handleLogout}>Logout</Button>
             </>
@@ -55,7 +59,7 @@ export function Navbar() {
             <Button variant="ghost" onClick={() => navigate('/')}>Home</Button>
             {isLoggedIn ? (
               <>
-                <Button variant="ghost" onClick={() => navigate('/submit-feedback')}>Submit Feedback</Button>
+                <Button variant="ghost" onClick={() => navigate('/add-feedback')}>Submit Feedback</Button>
                 <Button variant="ghost" onClick={() => navigate('/my-feedback')}>My Feedback</Button>
                 <Button variant="outline" onClick={handleLogout}>Logout</Button>
               </>

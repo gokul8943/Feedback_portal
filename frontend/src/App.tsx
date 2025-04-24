@@ -3,18 +3,20 @@ import { Footer } from "./components/Footer"
 import { Navbar } from "./components/Navbar"
 import { LoginPage } from "./pages/LoginPage"
 import { RegisterPage } from "./pages/RegisterPage"
+import HomePage from "./pages/HomePage"
+import { FeedbackForm } from "./components/FeedbackForm"
 
 const App = () => {
   return (
     <div>
       <Navbar />
-      <div>
+      <div className="pt-20">
       <Routes>
           {/* <Route path='/' element={<Home />} /> */}
           <Route path='/sign-in' element={<LoginPage />} />
           <Route path='/sign-up' element={<RegisterPage />} />
-          {/* <Route path='/pricing' element={<Pricing />} />
-          <Route path='/generate' element={<PromptGenerator />} /> */}
+          <Route path='/' element={<HomePage/>} />
+          <Route path="/add-feedback" element={<FeedbackForm />} />
           <Route />
         </Routes>
       </div>

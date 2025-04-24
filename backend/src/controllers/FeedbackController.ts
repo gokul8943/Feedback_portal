@@ -4,9 +4,10 @@ import { Request, Response } from "express";
 
 export const createFeedback = async (req: Request, res: Response) => {
     try {
-        const { text, rating } = req.body;
+        const userId = req.params.userId
+        const { comment, rating } = req.body;        
 
-        if (!text || rating == null) {
+        if (!comment || rating == null) {
             return res.status(400).json({ message: "Missing required fields: text or rating" });
         }
 
@@ -16,7 +17,8 @@ export const createFeedback = async (req: Request, res: Response) => {
         }
 
         const newFeedback = new Feedback({
-            text,
+            userId: userId,
+            text:comment,
             rating: parsedRating,
             createdAt: new Date()
         });
