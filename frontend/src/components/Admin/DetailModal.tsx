@@ -69,12 +69,10 @@ const DetailModal: React.FC<DetailModalProps> = ({
         setSendingReply(true);
         try {
             const res = await feedbackReply(feedbackId,reply)
-            console.log("Reply sent:", res.data);
-            console.log(reply);
             if(res){
                 message.success("Login Successful")
             }
-    
+            setReply('')
         } catch (err) {
             console.error('Failed to send reply', err);
         } finally {
