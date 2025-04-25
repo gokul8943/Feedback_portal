@@ -24,7 +24,6 @@ const initialAuthState: AuthState = {
 };
 
 interface AuthStore {
-  user: any;
   authState: AuthState;
   login: (accessToken: string, user: User, refreshToken: string) => void;
   logout: () => void;
