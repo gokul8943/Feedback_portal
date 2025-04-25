@@ -1,5 +1,5 @@
 import express from 'express'
-import { getFeedback, createFeedback, getFeedbackById, updateFeedback, deleteFeedback } from '../controllers/FeedbackController'
+import { getFeedback, createFeedback, getFeedbackById, updateFeedback, deleteFeedback,getFeedbackByUserId } from '../controllers/FeedbackController'
 
 const feedbackRouter = express.Router()
 
@@ -8,5 +8,6 @@ feedbackRouter.get('/feedback', getFeedback as any)
 feedbackRouter.get('/feedback/:feedbackId', getFeedbackById as any)
 feedbackRouter.delete('/feedback/delete', deleteFeedback as any)
 feedbackRouter.put('/feedback/edit', updateFeedback as any)
+feedbackRouter.get('/feedback/user/:userId', getFeedbackByUserId as any)
 
-export default feedbackRouter
+export default feedbackRouter 
