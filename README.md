@@ -39,7 +39,7 @@
 ### 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/feedbackhub.git
+git clone https://github.com/gokul8943/Feedback_portal.git
 cd feedbackhub
 
 
