@@ -1,5 +1,4 @@
-import { Route, Routes } from "react-router-dom"
-import { Footer } from "./components/Footer"
+import { Navigate, Route, Routes } from "react-router-dom"
 import { Navbar } from "./components/Navbar"
 import { LoginPage } from "./pages/LoginPage"
 import { RegisterPage } from "./pages/RegisterPage"
@@ -13,18 +12,16 @@ const App = () => {
     <div>
       <Navbar />
       <div className="pt-20">
-      <Routes>
-          {/* <Route path='/' element={<Home />} /> */}
+        <Routes>
+          <Route path='/' element={<Navigate to="/sign-in" replace />} /> {/* 👈 redirect */}
           <Route path='/sign-in' element={<LoginPage />} />
           <Route path='/sign-up' element={<RegisterPage />} />
-          <Route path='/' element={<HomePage/>} />
+          <Route path='/home' element={<HomePage />} /> {/* optional: give HomePage its own route */}
           <Route path="/add-feedback" element={<FeedbackForm />} />
           <Route path="/feedback" element={<MyFeedback />} />
-          <Route  path='/dashboard' element={<AdminDashBoard />}/>
-          <Route />
+          <Route path='/dashboard' element={<AdminDashBoard />} />
         </Routes>
       </div>
-      <Footer />
     </div>
   )
 }
