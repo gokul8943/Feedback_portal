@@ -37,7 +37,7 @@ export const createFeedback = async (req: Request, res: Response) => {
 
 export const getFeedback = async (req: Request, res: Response) => {
     try {
-        const feedback = await FeedbackModel.find().populate({path:'userId'});
+        const feedback = await FeedbackModel.find().populate({path:'userId'}).sort({ createdAt: -1 });
         return res.status(200).json({ message: "Feedback fetched successfully", feedback });
     } catch (error) {
         console.error("Error fetching feedback:", error);
