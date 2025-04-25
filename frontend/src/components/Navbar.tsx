@@ -33,7 +33,7 @@ export function Navbar() {
           {isLoggedIn ? (
             <>
               <Button variant="ghost" onClick={() => navigate('/add-feedback')}>Submit Feedback</Button>
-              <Button variant="ghost" onClick={() => navigate('/my-feedback')}>My Feedback</Button>
+              <Button variant="ghost" onClick={() => navigate('/feedback')}>My Feedback</Button>
               <Button variant="outline" onClick={handleLogout}>Logout</Button>
             </>
           ) : (
@@ -60,7 +60,7 @@ export function Navbar() {
             {isLoggedIn ? (
               <>
                 <Button variant="ghost" onClick={() => navigate('/add-feedback')}>Submit Feedback</Button>
-                <Button variant="ghost" onClick={() => navigate('/my-feedback')}>My Feedback</Button>
+                <Button variant="ghost" onClick={() => navigate('/feedback')}>My Feedback</Button>
                 <Button variant="outline" onClick={handleLogout}>Logout</Button>
               </>
             ) : (
