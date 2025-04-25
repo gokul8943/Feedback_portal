@@ -18,3 +18,7 @@ export const feedbackReply = (feedbackId:any,reply:any) =>{
         reply, 
       });
 }
+
+export const getFeedbackByUserId = (userId:any) => {
+    return axios.get(`/api/feedback/user/${userId}`)
+}
